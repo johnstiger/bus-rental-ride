@@ -21,4 +21,9 @@ class Account extends Model
     protected $hidden = [
         'password'
     ];
+
+    public function bookings()
+    {
+        return $this->hasMany(Booking::class);
+    }
 }

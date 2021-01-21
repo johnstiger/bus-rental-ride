@@ -18,4 +18,7 @@ class Booking extends Model
         'price',
         'status'
     ];
+    public function account(){
+        return $this->belongsTo(Account::class);
+    }
 }

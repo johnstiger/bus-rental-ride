@@ -4,16 +4,54 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
-use App\Models\Admin;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Hash;
 
 
 class ResourceUser extends Controller
 {
-    public function loginAdmin(Request $request)
+    public function login(Request $request)
     {
         
+    $client = User::where('email', $request->email)->first();
+
+    if (!$client || !Hash::check($request->password, $client->password)) {
+    return response([
+    'message' => ['This credential does not match in our records!']
+    ], 404);
     }
+
+    $token = $client->createToken('my_app_token')->plainTextToken;
+
+    $response = [
+    'user' => $client,
+    'token' => $token
+    ];
+    return response($response, 201);
+    }
+
+
+    public function register(Request $request)
+    {
+        $rules = [
+            'name' => 'required|min:3',
+            'email' => 'required|min:3|unique:users',
+            'password' => 'required|min:8'
+        ];
+        $validator = Validator::make($request->all(),$rules);
+        if($validator->fails()){
+            return response()->json($validator->errors(),400);
+        }
+
+        $client = new User();
+        $client->name = $request->name;
+        $client->email = $request->email;
+        $client->password = Hash::make($request->password);
+        if($client->email)
+        $client->save();
+        return response()->json($client, 201);
+    }
+
     /**
      * Display a listing of the resource.
      *

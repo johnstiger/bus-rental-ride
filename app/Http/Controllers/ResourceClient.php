@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Account;
-use App\Models\User;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 
@@ -56,7 +55,7 @@ class ResourceClient extends Controller
     public function login(Request $request)
     {
         
-    $client = User::where('email', $request->email)->first();
+    $client = Account::where('email', $request->email)->first();
 
     if (!$client || !Hash::check($request->password, $client->password)) {
     return response([
@@ -85,7 +84,7 @@ class ResourceClient extends Controller
             return response()->json($validator->errors(),400);
         }
 
-        $client = new User();
+        $client = new Account();
         $client->name = $request->name;
         $client->email = $request->email;
         $client->password = Hash::make($request->password);

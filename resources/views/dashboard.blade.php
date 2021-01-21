@@ -33,13 +33,16 @@
     @endforeach
 </table>
 <div class="add">
-<a href="/dashboard/addClient"><button class="btn btn-primary" style="margin: 20px;">Add New Client</button></a>
+<a href="/dashboard/addClient"><button class="btn btn-primary" style="margin: 20px;">Add New Admin</button></a>
 </div>
 <div class="add">
 <a href="/dashboard/AccessTokenForm"><button class="btn btn-primary" style="margin: 20px;">Access Token</button></a>
 </div>
 <div class="add">
 <a href="/dashboard/booking"><button class="btn btn-primary" style="margin: 20px;">Booking</button></a>
+</div>
+<div class="add">
+<a href="/dashboard/registerAccount"><button class="btn btn-primary" style="margin: 20px;">Register new Account</button></a>
 </div>
                 </div>
             </div>

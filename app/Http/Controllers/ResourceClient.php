@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Client;
+use App\Models\Account;
 use App\Models\User;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
@@ -17,7 +17,7 @@ class ResourceClient extends Controller
      */
     public function index()
     {
-        return response()->json(Client::get(), 200);
+        return response()->json(Account::get(), 200);
     }
 
     /**
@@ -49,7 +49,7 @@ class ResourceClient extends Controller
         if($validator->fails()){
             return response()->json($validator->errors(),400);
         }
-        $client = Client::create($request->all());
+        $client = Account::create($request->all());
         return response()->json($client, 201);
     }
 
@@ -102,7 +102,7 @@ class ResourceClient extends Controller
      */
     public function show($id)
     {
-        $client = Client::find($id);
+        $client = Account::find($id);
         if(is_null($client)){
             return response()->json(["message" => "Id is not Found!"], 404);
         }
@@ -129,7 +129,7 @@ class ResourceClient extends Controller
      */
     public function update(Request $request, $id)
     {
-        $client = Client::find($id);
+        $client = Account::find($id);
         if(is_null($client)){
             return response()->json(["message" => "Id is not Found!"], 404);
         }
@@ -145,7 +145,7 @@ class ResourceClient extends Controller
      */
     public function destroy($id)
     {
-        $client = Client::find($id);
+        $client = Account::find($id);
         if(is_null($client)){
             return response()->json(["message" => "Id is not Found!"], 404);
         }

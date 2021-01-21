@@ -33,7 +33,6 @@ class ClientController extends Controller
         'user' => $user,
         'token' => $token
         ];
-        // dd($response);
         return response($response, 201);
     }
     
